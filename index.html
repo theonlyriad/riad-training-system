@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RIAD — Calibrated Training Programs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ===================== AUTH SCREEN ===================== -->
+    <main id="authScreen" class="auth-screen">
+        <div class="auth-bg-grid"></div>
+
+        <div class="auth-wrap">
+            <div class="auth-brand">
+                <div class="auth-brand-mark">R.</div>
+                <h1>RIAD <span>TRAINING SYSTEM</span></h1>
+                <p class="auth-tag">Programs calibrated to one body. Yours.</p>
+
+                <div class="auth-readout" id="ambientReadout">
+                    <div class="readout-row"><span>WORKOUTS</span><strong>PERSONALIZED</strong></div>
+                    <div class="readout-row"><span>PROGRESS</span><strong>TRACKED</strong></div>
+                    <div class="readout-row"><span>RESULTS</span><strong>MEASURABLE</strong></div>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <!-- LOGIN -->
+                <section id="loginPage" class="auth-panel">
+                    <div class="panel-eyebrow">001 — ACCESS</div>
+                    <h2>Log in</h2>
+                    <p class="panel-sub">Pick up your program exactly where you left it.</p>
+
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" autocomplete="username" />
+
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" autocomplete="current-password" />
+
+                    <p class="field-error" id="loginError"></p>
+
+                    <button class="btn-primary" id="loginBtn">Log in</button>
+                    <p class="switch-line">
+                        <button type="button" class="link-btn" id="goToForgot">Forgot password?</button>
+                    </p>
+                    <p class="switch-line">New here? <button type="button" class="link-btn" id="goToSignup">Create an
+                            account</button></p>
+                </section>
+
+                <!-- SIGNUP -->
+                <section id="signupPage" class="auth-panel" style="display:none;">
+                    <div class="panel-eyebrow">001 — ACCESS</div>
+                    <h2>Create your account</h2>
+                    <p class="panel-sub">Your stats stay yours — saved only on this device.</p>
+
+                    <label for="signupName">Display name</label>
+                    <input type="text" id="signupName" autocomplete="name" />
+
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" autocomplete="email" />
+
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" autocomplete="username" />
+
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" autocomplete="new-password" />
+
+                    <p class="field-hint">6+ characters. Stored hashed, never in plain text.</p>
+                    <p class="field-error" id="signupError"></p>
+
+                    <button class="btn-primary" id="signupBtn">Create account</button>
+                    <p class="switch-line">Already registered? <button type="button" class="link-btn" id="goToLogin">Log
+                            in</button></p>
+                </section>
+                <!-- FORGOT PASSWORD -->
+                <section id="forgotPage" class="auth-panel" style="display:none;">
+                    <div class="panel-eyebrow">001 — RECOVERY</div>
+                    <h2>Reset password</h2>
+                    <p class="panel-sub">Enter your email and we’ll send you a reset link.</p>
+
+                    <label for="forgotEmail">Email</label>
+                    <input type="email" id="forgotEmail" autocomplete="email" />
+
+                    <p class="field-error" id="forgotError"></p>
+                    <p class="save-confirm" id="forgotConfirm"></p>
+
+                    <button class="btn-primary" id="forgotBtn">Send reset link</button>
+                    <p class="switch-line">
+                        Remembered it?
+                        <button type="button" class="link-btn" id="backToLoginFromForgot">Log in</button>
+                    </p>
+                </section>
+
+                <!-- RESET PASSWORD -->
+                <section id="resetPage" class="auth-panel" style="display:none;">
+                    <div class="panel-eyebrow">001 — RECOVERY</div>
+                    <h2>Choose new password</h2>
+                    <p class="panel-sub">Enter your new password below.</p>
+
+                    <label for="resetPassword">New password</label>
+                    <input type="password" id="resetPassword" autocomplete="new-password" />
+
+                    <p class="field-error" id="resetError"></p>
+                    <p class="save-confirm" id="resetConfirm"></p>
+
+                    <button class="btn-primary" id="resetBtn">Update password</button>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================== APP SHELL ===================== -->
+    <div id="appShell" class="app-shell" style="display:none;">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand-mini">R.</div>
+            </div>
+
+            <div class="profile-card">
+                <button class="avatar-btn" id="avatarBtn" title="Change picture">
+                    <img id="avatarImg" src="" alt="" style="display:none;" />
+                    <span id="avatarInitial">R</span>
+                    <span class="avatar-edit"><i class="fa-solid fa-camera"></i></span>
+                </button>
+                <input type="file" id="avatarInput" accept="image/*" hidden />
+                <div class="profile-name" id="sidebarName">—</div>
+                <div class="profile-username" id="sidebarUsername">@—</div>
+            </div>
+
+            <nav class="side-nav">
+                <button class="side-nav-item active" data-view="generate">
+                    <i class="fa-solid fa-sliders"></i><span>Generate</span>
+                </button>
+                <button class="side-nav-item" data-view="current">
+                    <i class="fa-solid fa-bolt"></i><span>Current program</span>
+                </button>
+                <button class="side-nav-item" data-view="history">
+                    <i class="fa-solid fa-clock-rotate-left"></i><span>History</span>
+                </button>
+                <button class="side-nav-item" data-view="profile">
+                    <i class="fa-solid fa-id-badge"></i><span>Profile</span>
+                </button>
+            </nav>
+
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Log out
+            </button>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- ===== VIEW: GENERATE ===== -->
+            <section class="view" id="view-generate">
+                <header class="view-header">
+                    <div class="view-eyebrow">002 — INTAKE</div>
+                    <h2>Build today's program</h2>
+                    <p class="view-sub">Every field below changes the numbers on the right in real time.</p>
+                </header>
+
+                <div class="generate-grid">
+                    <form id="programForm" class="intake-form">
+
+                        <div class="form-row two">
+                            <div>
+                                <label>Sex</label>
+                                <select id="gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Age</label>
+                                <input type="number" id="age" min="13" max="90" value="25" required />
+                            </div>
+                        </div>
+
+                        <div class="form-row two">
+                            <div>
+                                <label>Height (cm)</label>
+                                <input type="number" id="height" min="120" max="230" value="175" required />
+                            </div>
+                            <div>
+                                <label>Current weight (kg)</label>
+                                <input type="number" id="currentWeight" min="30" max="250" value="75" required />
+                            </div>
+                        </div>
+
+                        <div class="form-row two">
+                            <div>
+                                <label>Target weight (kg)</label>
+                                <input type="number" id="targetWeight" min="30" max="250" value="72" required />
+                            </div>
+                            <div>
+                                <label>Activity outside training</label>
+                                <select id="activity">
+                                    <option value="1.2">Sedentary (desk job)</option>
+                                    <option value="1.375" selected>Light (some walking)</option>
+                                    <option value="1.55">Active (on your feet)</option>
+                                    <option value="1.725">Very active (physical job)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row two">
+                            <div>
+                                <label>Training level</label>
+                                <select id="level">
+                                    <option>Beginner</option>
+                                    <option>Intermediate</option>
+                                    <option>Advanced</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Days per week</label>
+                                <select id="days">
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5" selected>5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <label>Main goal</label>
+                        <select id="goal">
+                            <option>Fat Loss</option>
+                            <option>Lean Muscle Gain</option>
+                            <option>Bulking</option>
+                            <option>Recomposition</option>
+                        </select>
+
+                        <label>Any joints/lifts to avoid? <span class="opt">(optional)</span></label>
+                        <input type="text" id="constraints" placeholder="e.g. no overhead pressing, bad left knee" />
+
+                        <button type="submit" class="btn-primary btn-generate">
+                            <i class="fa-solid fa-gauge-high"></i> Calibrate &amp; generate program
+                        </button>
+                    </form>
+
+                    <!-- LIVE READOUT -->
+                    <aside class="readout-panel">
+                        <div class="readout-eyebrow">LIVE CALIBRATION</div>
+                        <div class="readout-grid">
+                            <div class="readout-cell">
+                                <span class="rc-label">BMI</span>
+                                <span class="rc-value" id="rcBmi">—</span>
+                                <span class="rc-foot" id="rcBmiTag">—</span>
+                            </div>
+                            <div class="readout-cell">
+                                <span class="rc-label">BMR</span>
+                                <span class="rc-value" id="rcBmr">—</span>
+                                <span class="rc-foot">kcal / day at rest</span>
+                            </div>
+                            <div class="readout-cell">
+                                <span class="rc-label">TDEE</span>
+                                <span class="rc-value" id="rcTdee">—</span>
+                                <span class="rc-foot">kcal maintenance</span>
+                            </div>
+                            <div class="readout-cell highlight">
+                                <span class="rc-label">TARGET</span>
+                                <span class="rc-value" id="rcTarget">—</span>
+                                <span class="rc-foot" id="rcTargetTag">kcal / day goal</span>
+                            </div>
+                            <div class="readout-cell">
+                                <span class="rc-label">PROTEIN</span>
+                                <span class="rc-value" id="rcProtein">—</span>
+                                <span class="rc-foot">g / day target</span>
+                            </div>
+                            <div class="readout-cell">
+                                <span class="rc-label">EST. TIMELINE</span>
+                                <span class="rc-value" id="rcWeeks">—</span>
+                                <span class="rc-foot" id="rcWeeksTag">to reach target weight</span>
+                            </div>
+                        </div>
+                        <p class="readout-note">Numbers update live as you edit the form — your program is generated
+                            from these, not a template.</p>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- ===== VIEW: CURRENT PROGRAM ===== -->
+            <section class="view" id="view-current" style="display:none;">
+                <header class="view-header">
+                    <div class="view-eyebrow">003 — PROGRAM</div>
+                    <h2>Your current program</h2>
+                    <p class="view-sub" id="currentSub">Generate a program to see it here.</p>
+                </header>
+                <div id="currentProgramHost"></div>
+            </section>
+
+            <!-- ===== VIEW: HISTORY ===== -->
+            <section class="view" id="view-history" style="display:none;">
+                <header class="view-header">
+                    <div class="view-eyebrow">004 — LOG</div>
+                    <h2>Program history</h2>
+                    <p class="view-sub">Every program you've generated, kept for comparison.</p>
+                </header>
+                <div id="historyList" class="history-list"></div>
+            </section>
+
+            <!-- ===== VIEW: PROFILE ===== -->
+            <section class="view" id="view-profile" style="display:none;">
+                <header class="view-header">
+                    <div class="view-eyebrow">005 — ACCOUNT</div>
+                    <h2>Profile</h2>
+                    <p class="view-sub">This is what's saved to your account on this device.</p>
+                </header>
+
+                <div class="profile-grid">
+                    <div class="profile-edit-card">
+                        <button class="avatar-btn lg" id="avatarBtnLarge" title="Change picture">
+                            <img id="avatarImgLarge" src="" alt="" style="display:none;" />
+                            <span id="avatarInitialLarge">R</span>
+                            <span class="avatar-edit"><i class="fa-solid fa-camera"></i></span>
+                        </button>
+
+                        <label>Display name</label>
+                        <input type="text" id="profileNameInput" />
+
+                        <label>Username</label>
+                        <input type="text" id="profileUsernameStatic" disabled />
+
+                        <label>Email</label>
+                        <input type="email" id="profileEmailInput" />
+
+                        <label>Current password</label>
+                        <input type="password" id="currentPasswordInput" placeholder="Current password" />
+
+                        <label>New password</label>
+                        <input type="password" id="newPasswordInput" placeholder="New password" />
+
+                        <p class="field-error" id="profilePasswordError"></p>
+
+                        <button class="btn-primary" id="saveProfileBtn">Save changes</button>
+                        <p class="save-confirm" id="profileSaveConfirm"></p>
+                    </div>
+
+                    <div class="profile-stats-card">
+                        <div class="readout-eyebrow">LATEST STATS ON FILE</div>
+                        <div id="profileStatsHost" class="stats-host">
+                            <p class="empty-note">No intake submitted yet.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Riad Training System</p><br>
+        <p>For support, contact <a href="mailto:riadtrainingsystem@gmail.com">riadtrainingsystem@gmail.com</a></p>
+        <div class="socials">
+            <a href="https://www.instagram.com/theonlyriad" target="_blank" class="instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@theonlyriad" target="_blank" class="tiktok"><i
+                    class="fab fa-tiktok"></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
