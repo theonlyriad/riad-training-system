@@ -1,7 +1,7 @@
 
 const DB_KEY = "riad_users_v2";
 const SESSION_KEY = "riad_session_v2";
-const API_URL = "http://localhost:3000";
+const API_URL = "/api";
 // --------------------------- STORAGE HELPERS ---------------------------
 
 function loadUsers() {
