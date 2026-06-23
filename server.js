@@ -45,6 +45,9 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 app.post("/signup", async (req, res) => {
@@ -130,10 +133,17 @@ app.post("/signup", async (req, res) => {
             user: result.rows[0],
         });
     } catch (error) {
+        console.error("SIGNUP ERROR:", error);
+
         if (error.code === "23505") {
-            return res.status(409).json({ message: "Username already exists." });
+            return res.status(409).json({
+                message: "Username already exists."
+            });
         }
-        res.status(500).json({ message: "Server error." });
+
+        res.status(500).json({
+            message: "Server error."
+        });
     }
 });
 
