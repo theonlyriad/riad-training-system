@@ -84,11 +84,46 @@ app.post("/signup", async (req, res) => {
             subject: "Verify your RIAD Training account",
             text: `Verify your account here: ${verificationLink}`,
             html: `
-    <h2>Verify your email</h2>
-    <p>Click this link to activate your RIAD Training account:</p>
-    <p><a href="${verificationLink}">${verificationLink}</a></p>
-    <p>This link expires in 24 hours.</p>
-  `,
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
+    
+    <h2 style="color:#111;">Verify your email</h2>
+
+    <p>
+        Welcome to <strong>RIAD Training System</strong>.
+        Click the button below to activate your account.
+    </p>
+
+    <p style="margin:30px 0;">
+        <a href="${verificationLink}"
+           style="
+                background:#f05a28;
+                color:#ffffff;
+                padding:14px 28px;
+                text-decoration:none;
+                border-radius:8px;
+                font-weight:bold;
+                display:inline-block;
+           ">
+            Verify Email
+        </a>
+    </p>
+
+    <p style="color:#666;">
+        This verification link expires in 24 hours.
+    </p>
+
+    <hr style="margin:30px 0;border:none;border-top:1px solid #ddd;">
+
+    <p style="font-size:12px;color:#888;">
+        If the button doesn't work, copy and paste this link into your browser:
+    </p>
+
+    <p style="font-size:12px;word-break:break-all;">
+        ${verificationLink}
+    </p>
+
+</div>
+`,
         });
         res.status(201).json({
             message: "Account created. Please check your email to verify your account (if you don't see it, check your spam folder).",
@@ -356,11 +391,46 @@ app.post("/forgot-password", async (req, res) => {
             subject: "Reset your RIAD Training password",
             text: `Reset your password here: ${resetLink}`,
             html: `
-    <h2>Password reset</h2>
-    <p>Click this link to reset your password:</p>
-    <p><a href="${resetLink}">${resetLink}</a></p>
-    <p>This link expires in 30 minutes.</p>
-  `,
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
+
+    <h2 style="color:#111;">Reset your password</h2>
+
+    <p>
+        We received a request to reset your
+        <strong>RIAD Training System</strong> password.
+    </p>
+
+    <p style="margin:30px 0;">
+        <a href="${resetLink}"
+           style="
+                background:#f05a28;
+                color:#ffffff;
+                padding:14px 28px;
+                text-decoration:none;
+                border-radius:8px;
+                font-weight:bold;
+                display:inline-block;
+           ">
+            Reset Password
+        </a>
+    </p>
+
+    <p style="color:#666;">
+        This link expires in 30 minutes.
+    </p>
+
+    <hr style="margin:30px 0;border:none;border-top:1px solid #ddd;">
+
+    <p style="font-size:12px;color:#888;">
+        If the button doesn't work, copy and paste this link into your browser:
+    </p>
+
+    <p style="font-size:12px;word-break:break-all;">
+        ${resetLink}
+    </p>
+
+</div>
+`,
         });
 
         console.log("Email sent successfully!");
