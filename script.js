@@ -205,16 +205,16 @@ function prescriptionFor(level, goal, slot) {
     // slot: "primary" (compound) or "accessory"
     const table = {
         Beginner: {
-            primary: { "Fat Loss": "3×12", "Lean Muscle Gain": "3×10", "Bulking": "3×8-10", "Recomposition": "3×10-12" },
-            accessory: { "Fat Loss": "3×15", "Lean Muscle Gain": "3×12", "Bulking": "3×10-12", "Recomposition": "3×12-15" },
+            primary: { "Fat Loss": "3×12", "Lean Muscle Gain": "3×10", "Bulking": "2×8-10", "Recomposition": "3×10-12" },
+            accessory: { "Fat Loss": "3×15", "Lean Muscle Gain": "3×12", "Bulking": "2×10-12", "Recomposition": "3×12-15" },
         },
         Intermediate: {
-            primary: { "Fat Loss": "4×10-12", "Lean Muscle Gain": "4×8", "Bulking": "4×6-8", "Recomposition": "4×8-10" },
-            accessory: { "Fat Loss": "3×15", "Lean Muscle Gain": "3×10-12", "Bulking": "3×10", "Recomposition": "3×12" },
+            primary: { "Fat Loss": "3×10-12", "Lean Muscle Gain": "3×8", "Bulking": "2×6-8", "Recomposition": "3×8-10" },
+            accessory: { "Fat Loss": "3×15", "Lean Muscle Gain": "3×10-12", "Bulking": "2×10", "Recomposition": "3×12" },
         },
         Advanced: {
-            primary: { "Fat Loss": "5×8-10", "Lean Muscle Gain": "5×5-6", "Bulking": "5×4-6", "Recomposition": "4×6-8" },
-            accessory: { "Fat Loss": "4×12-15", "Lean Muscle Gain": "4×10", "Bulking": "3×8-10", "Recomposition": "4×10-12" },
+            primary: { "Fat Loss": "2×failure", "Lean Muscle Gain": "2×failure", "Bulking": "2×failure", "Recomposition": "2×failure" },
+            accessory: { "Fat Loss": "2×failure", "Lean Muscle Gain": "2×failure", "Bulking": "2×failure", "Recomposition": "2×failure" },
         },
     };
     return table[level][slot][goal];
