@@ -564,7 +564,7 @@ app.get("/verify-email/:token", async (req, res) => {
 
 app.post("/admin/send-update-email", async (req, res) => {
     try {
-        const { secret } = req.body;
+        const { secret, subject, message } = req.body;
 
         if (secret !== process.env.ADMIN_SECRET) {
             return res.status(403).json({ message: "Not authorized." });
@@ -586,17 +586,12 @@ app.post("/admin/send-update-email", async (req, res) => {
             await transporter.sendMail({
                 from: `"RIAD Training System" <${process.env.EMAIL_USER}>`,
                 to: user.email,
-                subject: "[subject]",
+                subject: subject,
                 html: `
                     <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
-                        <h2>[title]</h2>
+                        <h2>${subject}</h2>
                         <p>Hi ${user.display_name || "there"},</p>
-                        <p>
-                            [body text ...]
-                        </p>
-                        <p>
-                            [body text ...]
-                        </p>
+                        <p>${message}</p>
                         <p style="margin-top:25px;">
                             Thank you for using <strong>RIAD Training System</strong>.
                         </p>
