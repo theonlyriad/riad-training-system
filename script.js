@@ -281,6 +281,8 @@ function buildProgram(inputs, metrics) {
         generatedAt: new Date().toISOString(),
         inputs,
         metrics,
+        targetCalories: metrics.targetCalories || metrics.target || metrics.targetKcal,
+        protein: metrics.protein,
         days,
     };
 }
