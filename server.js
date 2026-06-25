@@ -561,6 +561,60 @@ app.get("/verify-email/:token", async (req, res) => {
         });
     }
 });
+
+app.post("/admin/send-update-email", async (req, res) => {
+    try {
+        const { secret } = req.body;
+
+        if (secret !== process.env.ADMIN_SECRET) {
+            return res.status(403).json({ message: "Not authorized." });
+        }
+
+        const usersResult = await pool.query(
+            "SELECT email, display_name FROM users WHERE email_verified = TRUE"
+        );
+
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+
+        for (const user of usersResult.rows) {
+            await transporter.sendMail({
+                from: `"RIAD Training System" <${process.env.EMAIL_USER}>`,
+                to: user.email,
+                subject: "Calories calculation fixed",
+                html: `
+                    <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
+                        <h2>Calories calculation fixed</h2>
+                        <p>Hi ${user.display_name || "there"},</p>
+                        <p>
+                            We fixed an issue where target calories could appear as
+                            <strong>null</strong> or <strong>NaN</strong> in generated programs.
+                        </p>
+                        <p>
+                            You can now generate a new program and your calories should display correctly.
+                        </p>
+                        <p style="margin-top:25px;">
+                            Thank you for using <strong>RIAD Training System</strong>.
+                        </p>
+                    </div>
+                `
+            });
+        }
+
+        res.json({
+            message: `Update email sent to ${usersResult.rows.length} verified users.`
+        });
+
+    } catch (error) {
+        console.error("ADMIN EMAIL ERROR:", error);
+        res.status(500).json({ message: "Server error." });
+    }
+});
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");
 });
