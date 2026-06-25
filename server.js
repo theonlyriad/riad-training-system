@@ -586,17 +586,16 @@ app.post("/admin/send-update-email", async (req, res) => {
             await transporter.sendMail({
                 from: `"RIAD Training System" <${process.env.EMAIL_USER}>`,
                 to: user.email,
-                subject: "Calories calculation fixed",
+                subject: "[subject]",
                 html: `
                     <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
-                        <h2>Calories calculation fixed</h2>
+                        <h2>[title]</h2>
                         <p>Hi ${user.display_name || "there"},</p>
                         <p>
-                            We fixed an issue where target calories could appear as
-                            <strong>null</strong> or <strong>NaN</strong> in generated programs.
+                            [body text ...]
                         </p>
                         <p>
-                            You can now generate a new program and your calories should display correctly.
+                            [body text ...]
                         </p>
                         <p style="margin-top:25px;">
                             Thank you for using <strong>RIAD Training System</strong>.
