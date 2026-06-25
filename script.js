@@ -79,8 +79,8 @@ function bmiTag(bmi) {
 }
 
 // Mifflin-St Jeor equation — the standard, evidence-based BMR formula.
-function calcBMR({ gender, weightKg, heightCm, age }) {
-    const base = 10 * weightKg + 6.25 * heightCm - 5 * age;
+function calcBMR({ gender, currentWeight, heightCm, age }) {
+    const base = 10 * currentWeight + 6.25 * heightCm - 5 * age;
     return gender === "Male" ? base + 5 : base - 161;
 }
 
