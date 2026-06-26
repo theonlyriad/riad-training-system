@@ -568,15 +568,20 @@ app.get("/verify-email/:token", async (req, res) => {
 
 app.post("/admin/send-update-email", async (req, res) => {
     try {
-        const { secret, subject, message } = req.body;
+        const { secret, subject, message, email } = req.body;
 
         if (secret !== process.env.ADMIN_SECRET) {
             return res.status(403).json({ message: "Not authorized." });
         }
 
-        const usersResult = await pool.query(
-            "SELECT email, display_name FROM users WHERE email_verified = TRUE"
-        );
+        const usersResult = email
+            ? await pool.query(
+                "SELECT email, display_name FROM users WHERE email = $1 AND email_verified = TRUE",
+                [email]
+            )
+            : await pool.query(
+                "SELECT email, display_name FROM users WHERE email_verified = TRUE"
+            );
 
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -592,7 +597,7 @@ app.post("/admin/send-update-email", async (req, res) => {
                 to: user.email,
                 subject: subject,
                 html: `
-                    <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
+                    < style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
                         <h2>${subject}</h2>
                         <p>Hi ${user.display_name || "there"},</p>
                         <p>${message.replace(/\n/g, "<br>")}</p>
@@ -608,6 +613,7 @@ app.post("/admin/send-update-email", async (req, res) => {
 </p>
                     </div>
                 `
+
             });
         }
 
