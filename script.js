@@ -713,7 +713,7 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
         saveUsers(users);
     }
 
-    alert("Account created. Please verify your email before logging in.");
+    alert("Account created. Please verify your email before logging in by checking your Gmail inbox.(if you don't see it, check your spam folder.)");
 
     document.getElementById("signupPage").style.display = "none";
     document.getElementById("loginPage").style.display = "block";
