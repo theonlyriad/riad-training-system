@@ -597,9 +597,15 @@ app.post("/admin/send-update-email", async (req, res) => {
                         <p>Hi ${user.display_name || "there"},</p>
                         <p>${message.replace(/\n/g, "<br>")}</p>
                         <p style="margin-top:25px;">
-                            Thank you for using <strong>RIAD Training System</strong>.
-                            <a href="riad-training-system.vercel.app" target="_blank" rel="noopener noreferrer">Click here to visit the site</a>.
-                        </p>
+    Thank you for using <strong>RIAD Training System</strong>.<br><br>
+
+    <a href="https://riad-training-system.vercel.app"
+       target="_blank"
+       rel="noopener noreferrer"
+       style="background:#ff5a1f;color:#fff;padding:12px 20px;text-decoration:none;border-radius:6px;font-weight:bold;">
+        Open RIAD Training System
+    </a>
+</p>
                     </div>
                 `
             });
