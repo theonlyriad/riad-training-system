@@ -595,7 +595,7 @@ app.post("/admin/send-update-email", async (req, res) => {
                     <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
                         <h2>${subject}</h2>
                         <p>Hi ${user.display_name || "there"},</p>
-                        <p>${message}</p>
+                        <p>${message.replace(/\n/g, "<br>")}</p>
                         <p style="margin-top:25px;">
                             Thank you for using <strong>RIAD Training System</strong>.
                             <a href="riad-training-system.vercel.app" target="_blank" rel="noopener noreferrer">Click here to visit the site</a>.
