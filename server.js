@@ -196,6 +196,8 @@ app.post("/login", async (req, res) => {
                 id: user.id,
                 display_name: user.display_name,
                 username: user.username,
+                email: user.email,
+                avatar: user.avatar,
             },
         });
     } catch (error) {

@@ -743,20 +743,30 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         return;
     }
 
+    const realUsername = data.user.username;
+
     const users = loadUsers();
-    users[username] = users[username] || {
+
+    users[realUsername] = users[realUsername] || {
         displayName: data.user.display_name,
         avatar: null,
+        email: data.user.email,
         currentProgram: null,
         history: [],
         createdAt: new Date().toISOString(),
     };
+
+    users[realUsername].displayName = data.user.display_name;
+    users[realUsername].email = data.user.email;
+    users[realUsername].avatar = data.user.avatar;
+
     saveUsers(users);
 
     localStorage.setItem("riad_token", data.token);
 
-    currentUsername = username;
-    setSession(username);
+    currentUsername = realUsername;
+    setSession(realUsername);
+
     enterApp();
 });
 
