@@ -597,22 +597,25 @@ app.post("/admin/send-update-email", async (req, res) => {
                 to: user.email,
                 subject: subject,
                 html: `
-                    < style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
-                        <h2>${subject}</h2>
-                        <p>Hi ${user.display_name || "there"},</p>
-                        <p>${message.replace(/\n/g, "<br>")}</p>
-                        <p style="margin-top:25px;">
-    Thank you for using <strong>RIAD Training System</strong>.<br><br>
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
+    <h2>${subject}</h2>
 
-    <a href="https://riad-training-system.vercel.app"
-       target="_blank"
-       rel="noopener noreferrer"
-       style="background:#ff5a1f;color:#fff;padding:12px 20px;text-decoration:none;border-radius:6px;font-weight:bold;">
-        Open RIAD Training System
-    </a>
-</p>
-                    </div>
-                `
+    <p>Hi ${user.display_name || "there"},</p>
+
+    <p>${message.replace(/\n/g, "<br>")}</p>
+
+    <p style="margin-top:25px;">
+        Thank you for using <strong>RIAD Training System</strong>.<br><br>
+
+        <a href="https://riad-training-system.vercel.app"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="background:#ff5a1f;color:#fff;padding:12px 20px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;">
+            Open RIAD Training System
+        </a>
+    </p>
+</div>
+`
 
             });
         }
