@@ -594,6 +594,7 @@ app.post("/admin/send-update-email", async (req, res) => {
                         <p>${message}</p>
                         <p style="margin-top:25px;">
                             Thank you for using <strong>RIAD Training System</strong>.
+                            <a href="riad-training-system.vercel.app" target="_blank" rel="noopener noreferrer">Click here to visit the site</a>.
                         </p>
                     </div>
                 `
