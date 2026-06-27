@@ -611,7 +611,7 @@ app.post("/admin/send-update-email", async (req, res) => {
            target="_blank"
            rel="noopener noreferrer"
            style="background:#ff5a1f;color:#fff;padding:12px 20px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;">
-            Open RIAD Training System
+            Open the app
         </a>
     </p>
 </div>
